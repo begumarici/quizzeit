@@ -10,7 +10,7 @@ This project was developed to make language learning more effective and engaging
 
 ## ✨ Features  
 
-- **Dynamic Question System**: Each quiz presents 10 randomly selected questions from a comprehensive database, ensuring variety and engagement.  
+- **Dynamic Question System**: Each quiz session presents 10 randomly selected questions from a rich database, ensuring a unique experience every time.
 - **Detailed Performance Review**: At the end of each quiz, users receive a summary of their correct and incorrect answers to track their progress.  
 - **Customizable Question Bank**: Questions are stored in a JSON file, making it easy to modify or expand the quiz content.  
 

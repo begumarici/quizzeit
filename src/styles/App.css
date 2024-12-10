@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #f4f4f9, #c8d6e5);
+  background: linear-gradient(45deg, #1B262C, #0b2745);
   color: black;
   height: 100vh;
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 }
 
 .App {
@@ -19,16 +21,16 @@ body {
   height: 100vh;
 }
 
+.title {
+  font-size: 6rem;
+  margin-bottom: 0px;
+  color: #ffffff;
+}
+
 h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #333;
-}
-
-p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  color: #555;
+  color: #ffffff;
 }
 
 h2 {
@@ -37,12 +39,47 @@ h2 {
   color: #333;
 }
 
+p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.info1 {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  margin-top: 0px;
+  color: #ffffff;
+}
+
+.info-text-container {
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+  line-height: 1.6;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.quiz-screen {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.quiz-score {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
 button {
   margin: 10px;
   padding: 12px 25px;
   font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
   color: white;
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  background: #216897;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -51,32 +88,40 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(135deg, #0056b3, #003f7f);
+  background: #2772a4;
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
 button.correct {
-  background: linear-gradient(135deg, #4caf50, #388e3c) !important;
-  color: white;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #629584, #629584) !important;
 }
 
 button.wrong {
-  background: linear-gradient(135deg, #f44336, #d32f2f) !important;
-  color: white;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #AF1740, #AF1740) !important;
 }
 
 button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
-  transform: none;
   box-shadow: none;
+  transform: none;
 }
 
-.options {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.start-button {
+  margin: 10px;
+  padding: 12px 25px;
+  font-size: 1.3rem;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  background: #0F4C75;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .Quiz {
@@ -100,29 +145,15 @@ button:disabled {
 
 .progress-bar {
   height: 100%;
-  background-color: #4caf50;
+  background-color: #bbc163;
   width: 0%;
-  transition: width 0.5s ease;
+  transition: width 0.5s ease-in-out;
 }
 
-.go-home-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: white;
-  background-color: #28a745;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.go-home-button:hover {
-  background-color: #218838;
-  transform: translateY(-2px);
-}
-
-.home-link {
-  text-decoration: none;
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .score-label {
@@ -131,4 +162,125 @@ button:disabled {
   margin-bottom: 15px;
   color: #333;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.your-vocabulary {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.your-vocabulary h1 {
+  text-align: center;
+  color: #000;
+}
+
+.your-vocabulary ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+  max-height: 50vh;
+  overflow-y: auto;
+  border: 1px solid #a6a6a6;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.your-vocabulary li {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.your-vocabulary strong {
+  color: #000;
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+
+  h1, h2 {
+    font-size: 1.5rem;
+  }
+
+  .info-text-container {
+    font-size: 0.85rem;
+    padding: 0 10px;
+  }
+
+  .Quiz {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .options {
+    gap: 10px;
+  }
+
+  .progress-container {
+    height: 15px;
+  }
+
+  .score-label {
+    font-size: 1rem;
+  }
+
+  .quiz-screen {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .quiz-score {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .Quiz ul {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+
+  .Quiz li {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    text-align: left;
+    word-wrap: break-word;
+  }
+
+  .Quiz button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    margin: 10px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+
+  .start-button {
+    font-size: 1rem;
+  }
+
+  .your-vocabulary {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .your-vocabulary ul {
+    max-height: 40vh;
+  }
+
+  .your-vocabulary li {
+    font-size: 0.85rem;
+  }
 }

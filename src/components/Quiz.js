@@ -1,9 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import ProgressBar from "./ProgressBar";
 import Loader from "./Loader";
 
 const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
+
+// get correct words from local storage
+const getCorrectWords = () => {
+  return JSON.parse(localStorage.getItem("correctWords")) || [];
+};
+
+const updateCorrectWords = (newCorrectWords) => {
+  const correctWords = getCorrectWords();
+  const updatedCorrectWords = [...correctWords];
+
+  // add new words with dıplicate checking
+  newCorrectWords.forEach((newWord) => {
+    if (!correctWords.some((word) => word.german === newWord.german)) {
+      updatedCorrectWords.push(newWord);
+    }
+  });
+
+  localStorage.setItem("correctWords", JSON.stringify(updatedCorrectWords));
+};
 
 function Quiz() {
   const [questions, setQuestions] = useState([]);
@@ -18,16 +37,23 @@ function Quiz() {
     fetch("/data/german_english.json")
       .then((response) => response.json())
       .then((data) => {
-        const entries = shuffleArray(Object.entries(data));
-        const quizQuestions = entries.slice(0, 10).map(([german, english]) => {
+        const correctWords = getCorrectWords();
+        const shuffledEntries = shuffleArray(Object.entries(data));
+        const filteredEntries = shuffledEntries.filter(
+          ([german]) => !correctWords.some((word) => word.german === german)
+        );
+
+        const quizQuestions = filteredEntries.slice(0, 10).map(([german, english]) => {
           const allAnswers = shuffleArray(Object.values(data)).slice(0, 3);
           const options = shuffleArray([english, ...allAnswers]);
           return {
             question: `What is the English word for "${german}"?`,
             options,
             answer: options.indexOf(english),
+            german,
           };
         });
+
         setQuestions(quizQuestions);
         setLoadingProgress(100);
       })
@@ -35,23 +61,31 @@ function Quiz() {
   }, []);
 
   const handleAnswer = (selectedIndex) => {
-    const isCorrect = questions[currentQuestionIndex].answer === selectedIndex;
+    const currentQuestion = questions[currentQuestionIndex];
+    const isCorrect = currentQuestion.answer === selectedIndex;
+
     setResults((prev) => [
       ...prev,
       {
-        question: questions[currentQuestionIndex].question,
-        selectedAnswer: questions[currentQuestionIndex].options[selectedIndex],
-        correctAnswer:
-          questions[currentQuestionIndex].options[
-            questions[currentQuestionIndex].answer
-          ],
+        question: currentQuestion.question,
+        selectedAnswer: currentQuestion.options[selectedIndex],
+        correctAnswer: currentQuestion.options[currentQuestion.answer],
         isCorrect,
       },
     ]);
 
+    if (isCorrect) {
+      setScore((prev) => prev + 1); // Skoru artır
+      updateCorrectWords([
+        {
+          german: currentQuestion.german,
+          english: currentQuestion.options[currentQuestion.answer],
+        },
+      ]);
+    }
+
     setSelectedAnswer(selectedIndex);
     setTimeout(() => {
-      if (isCorrect) setScore(score + 1);
       const nextIndex = currentQuestionIndex + 1;
       if (nextIndex < questions.length) {
         setCurrentQuestionIndex(nextIndex);
@@ -60,6 +94,10 @@ function Quiz() {
       }
       setSelectedAnswer(null);
     }, 500);
+  };
+
+  const finishQuizEarly = () => {
+    setIsQuizFinished(true);
   };
 
   if (loadingProgress < 100) {
@@ -71,10 +109,12 @@ function Quiz() {
   }
 
   if (isQuizFinished) {
+    const answeredQuestionsCount = results.length;
+
     return (
       <div className="Quiz">
-        <h1>Quiz Finished!</h1>
-        <p>Your score: {score} / {questions.length}</p>
+        <h1 className="quiz-screen">Quiz Finished!</h1>
+        <p className="quiz-score">Your score: {score} / {answeredQuestionsCount}</p>
         <h2>Summary</h2>
         <ul>
           {results.map((result, index) => (
@@ -91,9 +131,11 @@ function Quiz() {
           ))}
         </ul>
         <button onClick={() => window.location.reload()}>Restart Quiz</button>
-        <Link to="/">
-          <button className="go-home-button">Go to Home</button>
-        </Link>
+        <a href="/">
+        <button className="go-home-button">
+          Go to Home
+          </button>
+      </a>
       </div>
     );
   }
@@ -126,12 +168,13 @@ function Quiz() {
           </button>
         ))}
       </div>
-      <Link to="/">
-        <button className="go-home-button">Go to Home</button>
-      </Link>
+      <button onClick={finishQuizEarly} className="finish-quiz-button">
+        Finish Quiz
+      </button>
+
+      
     </div>
   );
-  
 }
 
 export default Quiz;
