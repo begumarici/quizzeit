@@ -17,6 +17,10 @@ This project was developed to make language learning more effective and engaging
 
 ---
 
+## 📡 Live Demo
+Try out the live version of QuizZeit here: 
+[QuizZeit](https://quizzeit.vercel.app)
+
 ## 📋 Installation and Usage Instructions
 
 1. **Clone the Project**:  
