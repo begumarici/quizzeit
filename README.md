@@ -11,7 +11,8 @@ This project was developed to make language learning more effective and engaging
 ## ✨ Features  
 
 - **Dynamic Question System**: Each quiz session presents 10 randomly selected questions from a rich database, ensuring a unique experience every time.
-- **Detailed Performance Review**: At the end of each quiz, users receive a summary of their correct and incorrect answers to track their progress.  
+- **Progress Tracking**: Words you answer correctly are saved in the 'Your Vocabulary' section to help avoid repetition and monitor your progress.
+- **Detailed Performance Review**: Get a summary of your answers at the end of each quiz, showing correct and incorrect responses.
 - **Customizable Question Bank**: Questions are stored in a JSON file, making it easy to modify or expand the quiz content.  
 
 ---
@@ -41,9 +42,9 @@ This project was developed to make language learning more effective and engaging
 
 ## 🖼️ Screenshots
 
-| Home Screen | Quiz Screen | Results Screen |
-|-------------|-------------|----------------|
-| ![Home Screen](/screenshots/home-screen.png) | ![Quiz Screen](/screenshots/quiz-screen.png) | ![Results Screen](/screenshots/results-screen.png) |
+| Home Screen | Quiz Screen | Results Screen | Your Vocabulary
+|-------------|-------------|----------------|----------------|
+| ![Home Screen](/screenshots/home-screen.png) | ![Quiz Screen](/screenshots/quiz-screen.png) | ![Results Screen](/screenshots/results-screen.png) | ![Your Vocabulary](/screenshots/vocabulary.png) |
 
 
 ---
@@ -52,6 +53,7 @@ This project was developed to make language learning more effective and engaging
 
 - Add support for more language pairs (e.g., French-English).
 - Categorize words into levels such as A1, A2, etc., to offer level-based quizzes tailored to users' proficiency.  
+- Include vocabulary practice sessions based on incorrect answers.
 - Enhance compatibility for mobile devices.
 
 ---
